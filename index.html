@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechPoint Academy | Professional IT Təlimləri</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- 1. RESET & VARIABLES --- */
+        :root {
+            --primary: #0f172a;      
+            --secondary: #1e293b;    
+            --accent: #38bdf8;       
+            --accent-glow: rgba(56, 189, 248, 0.5);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass: rgba(30, 41, 59, 0.7);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- 2. CANVAS BACKGROUND (Yeni Effekt) --- */
+        #canvas-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+        }
+
+        /* --- 3. NAVBAR --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            max-width: 1400px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 2rem;
+            height: 80px;
+        }
+
+        .logo-box { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .logo-img { height: 45px; width: auto; object-fit: contain; }
+        .logo-text { font-size: 1.5rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .logo-text span { color: var(--accent); }
+
+        .nav-menu { display: flex; gap: 5px; list-style: none; }
+        .nav-link {
+            text-decoration: none; color: var(--text-muted);
+            font-weight: 500; padding: 0.6rem 1rem; border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active { color: var(--accent); background: rgba(56, 189, 248, 0.1); text-shadow: 0 0 10px var(--accent-glow); }
+
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; color: var(--text-main); }
+
+        /* --- 4. SECTIONS COMMON --- */
+        section { 
+            display: none; padding: 120px 20px 60px; 
+            max-width: 1400px; margin: 0 auto;
+            animation: fadeIn 0.6s ease;
+        }
+        section.active { display: block; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .section-head { text-align: center; margin-bottom: 4rem; }
+        .section-head h2 { font-size: 2.5rem; margin-bottom: 1rem; color: white; text-shadow: 0 0 20px rgba(255,255,255,0.2); }
+        .section-head p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+        /* --- 5. HERO SECTION --- */
+        #home { 
+            display: none; height: 100vh;
+            align-items: center; justify-content: center;
+            text-align: center; padding-top: 0;
+        }
+        #home.active { display: flex; }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 1.1; font-weight: 800; margin-bottom: 1.5rem;
+        }
+        .hero-content h1 span { color: var(--accent); text-shadow: 0 0 30px var(--accent); }
+        .hero-desc { font-size: 1.25rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 2.5rem; }
+        
+        .btn-main {
+            padding: 1rem 2.5rem; font-size: 1.1rem; font-weight: 600;
+            background: var(--accent); color: var(--primary);
+            border: none; border-radius: 50px; cursor: pointer;
+            box-shadow: 0 0 20px var(--accent-glow);
+            transition: 0.3s; text-decoration: none; display: inline-block;
+        }
+        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 0 40px var(--accent); background: #fff; }
+
+        /* --- 6. GRID SYSTEMS --- */
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+
+        .card {
+            background: var(--glass); border: 1px solid var(--border);
+            border-radius: 16px; padding: 2rem; transition: 0.4s;
+            cursor: pointer; position: relative; overflow: hidden; backdrop-filter: blur(5px);
+        }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--accent); opacity: 0; transition: 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 40px rgba(56, 189, 248, 0.15); }
+        .card:hover::before { opacity: 1; }
+
+        .card-icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+        .read-more { margin-top: 1.5rem; color: var(--accent); font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; }
+
+        /* --- 7. TEAM SECTION --- */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; }
+        .team-card {
+            background: var(--secondary); border-radius: 20px;
+            overflow: hidden; text-align: center; border: 1px solid var(--border);
+            transition: 0.3s;
+        }
+        .team-card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        
+        .team-img-box {
+            height: 200px; background: linear-gradient(135deg, #1e293b, #334155);
+            display: flex; align-items: flex-end; justify-content: center;
+        }
+        .team-img {
+            width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--secondary);
+            object-fit: cover; margin-bottom: -50px; background: #fff;
+        }
+        .team-info { padding: 60px 20px 30px; }
+        .team-role { color: var(--accent); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: block;}
+        .team-social { margin-top: 15px; display: flex; justify-content: center; gap: 15px; }
+        .team-social a { color: var(--text-muted); font-size: 1.2rem; transition: 0.3s; }
+        .team-social a:hover { color: var(--accent); }
+
+        /* --- 8. DETAILED VIEW --- */
+        .detail-overlay {
+            display: none; background: rgba(15, 23, 42, 0.95);
+            padding: 120px 20px 60px; min-height: 100vh;
+        }
+        .back-btn {
+            background: transparent; border: 1px solid var(--border); color: var(--text-main);
+            padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-bottom: 2rem;
+            display: inline-flex; align-items: center; gap: 8px; transition: 0.3s;
+        }
+        .back-btn:hover { border-color: var(--accent); color: var(--accent); }
+        
+        .detail-content img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 20px; margin-bottom: 2rem; opacity: 0.8; }
+        .detail-content h2 { font-size: 2.5rem; margin-bottom: 1.5rem; color: var(--accent); }
+        .detail-content .text-body { font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; }
+        .register-btn {
+            display: inline-block; margin-top: 2rem; padding: 1rem 3rem;
+            background: var(--accent); color: var(--primary); font-weight: 700;
+            text-decoration: none; border-radius: 8px; cursor: pointer;
+            box-shadow: 0 0 15px var(--accent-glow); transition: 0.3s;
+            border: none; font-size: 1rem;
+        }
+        .register-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--accent); }
+
+        /* --- 9. MODAL (POPUP FORM) --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8); z-index: 2000;
+            display: none; justify-content: center; align-items: center;
+            backdrop-filter: blur(8px);
+        }
+        .modal-content {
+            background: var(--secondary); padding: 2.5rem; border-radius: 20px;
+            width: 90%; max-width: 500px; border: 1px solid var(--accent);
+            box-shadow: 0 0 50px rgba(56, 189, 248, 0.2);
+            position: relative; animation: slideUp 0.4s ease;
+        }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        .close-modal {
+            position: absolute; top: 15px; right: 20px; font-size: 1.5rem;
+            color: var(--text-muted); cursor: pointer; transition: 0.3s;
+        }
+        .close-modal:hover { color: var(--accent); }
+        
+        .modal-content h3 { color: var(--text-main); margin-bottom: 1.5rem; text-align: center; font-size: 1.8rem; }
+        
+        .modal-form .form-group { margin-bottom: 1.2rem; }
+        .modal-form label { display: block; margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.9rem; }
+        .modal-form input, .modal-form select {
+            width: 100%; padding: 12px; background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border); border-radius: 8px; color: white;
+        }
+        .modal-form input:focus, .modal-form select:focus { border-color: var(--accent); outline: none; }
+        
+        .modal-submit {
+            width: 100%; padding: 12px; background: var(--accent); border: none;
+            color: var(--primary); font-weight: 800; border-radius: 8px; cursor: pointer;
+            margin-top: 1rem; transition: 0.3s;
+        }
+        .modal-submit:hover { background: white; }
+
+
+        /* --- 10. CONTACT FORM PAGE --- */
+        .contact-wrapper {
+            display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem;
+            background: var(--secondary); padding: 3rem; border-radius: 24px; border: 1px solid var(--border);
+        }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; color: var(--text-muted); }
+        .form-control {
+            width: 100%; padding: 1rem; background: var(--primary);
+            border: 1px solid var(--border); border-radius: 8px; color: var(--text-main);
+            font-family: inherit;
+        }
+        .form-control:focus { outline: none; border-color: var(--accent); }
+
+        /* --- 11. RESPONSIVE --- */
+        @media (max-width: 968px) {
+            .nav-menu {
+                position: absolute; top: 80px; left: 0; width: 100%;
+                background: var(--secondary); flex-direction: column;
+                padding: 2rem; gap: 1rem; display: none; border-bottom: 1px solid var(--border);
+            }
+            .nav-menu.active { display: flex; }
+            .hamburger { display: block; }
+            #home { height: auto; padding: 150px 20px 80px; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .contact-wrapper { grid-template-columns: 1fr; }
+        }
+
+        footer {
+            background: #020617; padding: 3rem 2rem; text-align: center;
+            border-top: 1px solid var(--border); margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas-bg"></canvas>
+
+    <div class="modal-overlay" id="registrationModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3>Qeydiyyat</h3>
+            <form class="modal-form" id="internalRegForm" onsubmit="submitRegistration(event)">
+                <div class="form-group">
+                    <label>Ad və Soyad *</label>
+                    <input type="text" name="fullname" required placeholder="Tam adınızı daxil edin">
+                </div>
+                <div class="form-group">
+                    <label>Mobil Nömrə *</label>
+                    <input type="tel" name="phone" required placeholder="050 000 00 00">
+                </div>
+                <div class="form-group">
+                    <label>Təlim *</label>
+                    <select name="course" id="modalCourseSelect" required>
+                        <option value="">Seçin...</option>
+                        <option value="DevOps Engineering">DevOps Engineering</option>
+                        <option value="Kibertəhlükəsizlik">Kibertəhlükəsizlik</option>
+                        <option value="Şəbəkə İnzibatçılığı">Şəbəkə İnzibatçılığı</option>
+                        <option value="Korporativ Təlim">Korporativ Təlim</option>
+                    </select>
+                </div>
+                <button type="submit" class="modal-submit">Təsdiqlə və Göndər</button>
+            </form>
+        </div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="logo-box" onclick="navigate('home')">
+                <img src="./photos/techpointlogo.png" alt="TechPoint" class="logo-img" onerror="this.style.display='none'">
+                <div class="logo-text">TechPoint<span>.</span></div>
+            </div>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#" class="nav-link active" onclick="navigate('home')">Ana Səhifə</a></li>
+                <li><a href="#" class="nav-link" onclick="navigate('about')">Haqqımızda</a></li>
+                <li><a href="#" class="nav-link" onclick="navigate('corporate')">Korporativ</a></li>
+                <li><a href="#" class="nav-link" onclick="navigate('trainings')">Təlimlər</a></li>
+                <li><a href="#" class="nav-link" onclick="navigate('team')">Komanda</a></li>
+                <li><a href="#" class="nav-link" onclick="navigate('blog')">Blog</a></li>
+                <li><a href="#" class="nav-link" onclick="navigate('contact')">Əlaqə</a></li>
+            </ul>
+
+            <div class="hamburger" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="active">
+        <div class="hero-content">
+            <h1>Sərhədsiz <br><span>Texnologiya</span> Dünyası</h1>
+            <p class="hero-desc">
+                TechPoint Academy ilə təcrübəni kəşf edin. Kibertəhlükəsizlik və İT sahəsində gələcəyinizi bu gündən qurun.
+            </p>
+            <button onclick="navigate('trainings')" class="btn-main">Karyerana Başla</button>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="section-head">
+            <h2>Haqqımızda</h2>
+            <p>Biz sadəcə tədris mərkəzi deyil, texnologiya və innovasiya mərkəziyik.</p>
+        </div>
+        <div class="contact-wrapper" style="align-items: center;">
+             <div>
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Missiyamız</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                    TechPoint Academy olaraq missiyamız, IT və kibertəhlükəsizlik sahəsində real bilik və praktik bacarıqlara malik mütəxəssislər yetişdirməkdir.
+                </p>
+                <ul style="list-style: none; color: var(--text-main);">
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 10px;"></i> Mentor və karyera dəstəyi</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 10px;"></i> Beynəlxalq Sertifikat</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 10px;"></i> 100% Praktiki Tədris</li>
+                </ul>
+            </div>
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" style="width: 100%; border-radius: 20px; opacity: 0.9;" alt="Team">
+        </div>
+    </section>
+
+    <section id="corporate">
+        <div id="corp-list">
+            <div class="section-head">
+                <h2>Korporativ Xidmətlər</h2>
+                <p>Biznesinizin təhlükəsizliyi və rəqəmsal dayanıqlılığı üçün peşəkar həllər.</p>
+            </div>
+            <div class="grid-container">
+                <div class="card" onclick="openDetail('corp', 'consulting')">
+                    <i class="fas fa-handshake card-icon"></i>
+                    <h3>Kiber Konsultasiya</h3>
+                    <p>Korporativ Kibertəhlükəsizlik Maarifləndirmə Proqramı.</p>
+                    <div class="read-more">Detallı Bax <i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div id="corp-detail-view" class="detail-overlay"></div>
+    </section>
+
+    <section id="trainings">
+        <div id="training-list">
+            <div class="section-head">
+                <h2>Tədris Proqramları</h2>
+                <p>Sıfırdan mütəxəssis səviyyəsinə qədər inkişaf yolu.</p>
+            </div>
+            <div class="grid-container">
+                <div class="card" onclick="openDetail('training', 'devops')">
+                    <i class="fas fa-infinity card-icon"></i>
+                    <h3>DevOps Engineering</h3>
+                    <p>CI/CD, Docker, Kubernetes və Cloud texnologiyaları.</p>
+                    <div class="read-more">Sillabusa Bax <i class="fas fa-arrow-right"></i></div>
+                </div>
+                <div class="card" onclick="openDetail('training', 'cyber')">
+                    <i class="fas fa-shield-virus card-icon"></i>
+                    <h3>Kibertəhlükəsizlik</h3>
+                    <p>Red Team (Hücum) və Blue Team (Müdafiə) əməliyyatları.</p>
+                    <div class="read-more">Sillabusa Bax <i class="fas fa-arrow-right"></i></div>
+                </div>
+                <div class="card" onclick="openDetail('training', 'network')">
+                    <i class="fas fa-network-wired card-icon"></i>
+                    <h3>Şəbəkə İnzibatçılığı</h3>
+                    <p>Cisco, Routing, Switching və sistem idarəetməsi.</p>
+                    <div class="read-more">Sillabusa Bax <i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div id="training-detail-view" class="detail-overlay"></div>
+    </section>
+
+    <section id="team">
+        <div class="section-head">
+            <h2>Komandamız</h2>
+            <p>Sahəsinin ən yaxşı ekspertləri sizinlədir.</p>
+        </div>
+        <div class="team-grid">
+             <div class="team-card">
+                <div class="team-img-box"><img src="./photos/Cefer Memmedzade.jpg" alt="Instructor" class="team-img"></div>
+                <div class="team-info">
+                    <h3>Cəfər Məmmədzadə</h3>
+                    <span class="team-role">Direktor & Blue Team</span>
+                    <div class="team-social"><a href="#"><i class="fab fa-linkedin"></i></a></div>
+                </div>
+            </div>
+             <div class="team-card">
+                <div class="team-img-box"><img src="./photos/TeymurNovruzov.jpg" alt="Instructor" class="team-img"></div>
+                <div class="team-info">
+                    <h3>Teymur Novruzov</h3>
+                    <span class="team-role">Blue Team</span>
+                    <div class="team-social"><a href="#"><i class="fab fa-linkedin"></i></a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="blog">
+        <div id="blog-list">
+             <div class="section-head"><h2>Blog</h2><p>Yeniliklər</p></div>
+             <div class="grid-container">
+                <div class="card" onclick="openDetail('blog', 'ai-sec')">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" style="width:100%; height:200px; object-fit:cover; border-radius:10px; margin-bottom:15px;">
+                    <h3>Süni İntellekt və Təhlükəsizlik</h3>
+                    <div class="read-more">Oxu <i class="fas fa-book-open"></i></div>
+                </div>
+             </div>
+        </div>
+        <div id="blog-detail-view" class="detail-overlay"></div>
+    </section>
+
+    <section id="contact">
+        <div class="section-head">
+            <h2>Bizimlə Əlaqə</h2>
+            <p>Sualınız var? Bizə yazın.</p>
+        </div>
+        <div class="contact-wrapper">
+             <div>
+                <h3 style="margin-bottom: 2rem; color: var(--accent);">Kontakt</h3>
+                <p>Bakı şəhəri, Nizami küç. 203</p>
+                <p>+994 50 123 45 67</p>
+             </div>
+             <form onsubmit="event.preventDefault(); alert('Mesajınız göndərildi.');">
+                <div class="form-group"><input type="text" class="form-control" placeholder="Adınız"></div>
+                <div class="form-group"><input type="email" class="form-control" placeholder="Email"></div>
+                <div class="form-group"><textarea class="form-control" placeholder="Mesaj"></textarea></div>
+                <button class="btn-main" style="width: 100%; border-radius: 8px;">Göndər</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div style="max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+            <div style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 10px;">TechPoint<span>.</span></div>
+            <div style="color: rgba(255,255,255,0.2); font-size: 0.9rem;">&copy; 2026 TechPoint Academy. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. VISUAL EFFECT: CANVAS PARTICLES (Nöqtələr və Xətlər) ---
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        let particlesArray;
+
+        // Canvas ölçüsünü ekran ölçüsünə uyğunlaşdır
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = '#38bdf8'; // Accent color
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * 0.4) - 0.2;
+                let directionY = (Math.random() * 0.4) - 0.2;
+                let color = '#38bdf8';
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function connect() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
+                                   ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width/7) * (canvas.height/7)) {
+                        opacityValue = 1 - (distance / 20000);
+                        ctx.strokeStyle = 'rgba(56, 189, 248,' + opacityValue + ')';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+        }
+
+        window.addEventListener('resize', function() {
+            canvas.width = innerWidth;
+            canvas.height = innerHeight;
+            init();
+        });
+
+        init();
+        animate();
+
+
+        // --- 2. DATA OBJECTS ---
+        const trainingData = {
+            'devops': { title: "DevOps Engineering", img: "https://images.unsplash.com/photo-1667372393119-c85c020799a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80", desc: "<p>DevOps mühəndisliyi...</p>" },
+            'cyber': { title: "Kibertəhlükəsizlik", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80", desc: "<p>Hücum və Müdafiə...</p>" },
+            'network': { title: "Şəbəkə İnzibatçılığı", img: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80", desc: "<p>Cisco və Network...</p>" }
+        };
+        const corpData = {
+            'consulting': { title: "Kiber Konsultasiya", img: "./photos/Kiberkonsultasiya.jpg", desc: "Korporativ təhlükəsizlik proqramları..." }
+        };
+        const blogData = {
+            'ai-sec': { title: "AI və Təhlükəsizlik", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80", desc: "<p>AI trendləri...</p>" },
+            'cloud': { title: "Cloud Texnologiyası", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80", desc: "Cloud keçidləri..." }
+        };
+
+        // --- 3. NAVIGATION ---
+        function navigate(pageId) {
+            document.getElementById('navMenu').classList.remove('active');
+            document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.detail-overlay').forEach(el => el.style.display = 'none');
+            
+            if(document.getElementById('corp-list')) document.getElementById('corp-list').style.display = 'block';
+            if(document.getElementById('training-list')) document.getElementById('training-list').style.display = 'block';
+            if(document.getElementById('blog-list')) document.getElementById('blog-list').style.display = 'block';
+
+            const target = document.getElementById(pageId);
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo(0,0);
+            }
+        }
+        function toggleMenu() { document.getElementById('navMenu').classList.toggle('active'); }
+
+        // --- 4. MODAL & FORM LOGIC (VACIB HISSƏ) ---
+
+        // Detallı səhifəni açanda
+        function openDetail(type, id) {
+            let data, listId, viewId;
+            let courseName = ""; // Modal üçün kurs adı
+
+            if (type === 'training') {
+                data = trainingData[id];
+                listId = 'training-list';
+                viewId = 'training-detail-view';
+                courseName = data.title; // Kursun adını götürürük
+            } else if (type === 'corp') {
+                data = corpData[id];
+                listId = 'corp-list';
+                viewId = 'corp-detail-view';
+                courseName = "Korporativ Təlim";
+            } else if (type === 'blog') {
+                data = blogData[id];
+                listId = 'blog-list';
+                viewId = 'blog-detail-view';
+            }
+
+            if (!data) return;
+
+            document.getElementById(listId).style.display = 'none';
+            const detailView = document.getElementById(viewId);
+            detailView.style.display = 'block';
+
+            // Əgər Blog deyilsə, "Qeydiyyat" düyməsi qoyuruq
+            let btnHtml = '';
+            if (type !== 'blog') {
+                // Düyməyə kursun adını ötürürük ki, modal açılanda avtomatik seçilsin
+                btnHtml = `<button class="register-btn" onclick="openModal('${courseName}')">Qeydiyyatdan Keç</button>`;
+            }
+
+            detailView.innerHTML = `
+                <div class="container detail-content">
+                    <button class="back-btn" onclick="closeDetail('${listId}', '${viewId}')">
+                        <i class="fas fa-arrow-left"></i> Geri Qayıt
+                    </button>
+                    <img src="${data.img}" alt="${data.title}">
+                    <h2>${data.title}</h2>
+                    <div class="text-body">${data.desc}</div>
+                    ${btnHtml}
+                </div>
+            `;
+            detailView.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeDetail(listId, viewId) {
+            document.getElementById(viewId).style.display = 'none';
+            document.getElementById(listId).style.display = 'block';
+            window.scrollTo(0,0);
+        }
+
+        // --- MODAL FUNCTIONS ---
+        const modal = document.getElementById('registrationModal');
+        const courseSelect = document.getElementById('modalCourseSelect');
+
+        function openModal(preSelectedCourse) {
+            modal.style.display = 'flex';
+            if(preSelectedCourse) {
+                courseSelect.value = preSelectedCourse;
+            }
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Modal xaricinə klikləyəndə bağlansın
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // --- DATA "SENDING" SIMULATION ---
+        function submitRegistration(e) {
+            e.preventDefault();
+            
+            // Inputları götürürük
+            const fullname = e.target.fullname.value;
+            const phone = e.target.phone.value;
+            const course = e.target.course.value;
+
+            // 1. Simulyasiya (Console-da göstərir)
+            console.log("Yeni Qeydiyyat:", { fullname, phone, course });
+
+            // 2. Məlumatın göndərilməsi (Real həyatda bura API yazılmalıdır)
+            // Hazırda biz bunu sadəcə "yadda saxlanmış" kimi göstəririk.
+            
+            const btn = document.querySelector('.modal-submit');
+            const originalText = btn.innerText;
+            btn.innerText = "Göndərilir...";
+            
+            setTimeout(() => {
+                btn.innerText = "Uğurla Göndərildi! ✓";
+                btn.style.backgroundColor = "#22c55e"; // Green
+                
+                setTimeout(() => {
+                    closeModal();
+                    e.target.reset();
+                    btn.innerText = originalText;
+                    btn.style.backgroundColor = "var(--accent)";
+                    alert(`Təşəkkürlər, ${fullname}! Sorğunuz qəbul edildi. Tezliklə əlaqə saxlayacağıq.`);
+                }, 1000);
+            }, 1000);
+        }
+
+    </script>
+</body>
+</html>
