@@ -264,10 +264,9 @@
                     <label>Təlim *</label>
                     <select name="course" id="modalCourseSelect" required>
                         <option value="">Seçin...</option>
-                        <option value="DevOps Engineering">DevOps Engineering</option>
-                        <option value="Kibertəhlükəsizlik">Kibertəhlükəsizlik</option>
-                        <option value="Şəbəkə İnzibatçılığı">Şəbəkə İnzibatçılığı</option>
-                        <option value="Korporativ Təlim">Korporativ Təlim</option>
+                        <option value="Kibertəhlükəsizlik">Blue Team</option>
+                        <option value="Şəbəkə İnzibatçılığı">Red Team</option>
+                        <option value="Korporativ Təlim">Helpdesk & IT foundation</option>
                     </select>
                 </div>
                 <button type="submit" class="modal-submit">Təsdiqlə və Göndər</button>
@@ -356,20 +355,20 @@
             <div class="grid-container">
                 <div class="card" onclick="openDetail('training', 'devops')">
                     <i class="fas fa-infinity card-icon"></i>
-                    <h3>DevOps Engineering</h3>
-                    <p>CI/CD, Docker, Kubernetes və Cloud texnologiyaları.</p>
+                    <h3>Blue Team</h3>
+                    <p>Şəbəkə və sistem təhlükəsizliyi, SIEM sistemləri, phishing aşkarlanması, incident response və real log analizi üzərində tam praktik təlim.</p>
                     <div class="read-more">Sillabusa Bax <i class="fas fa-arrow-right"></i></div>
                 </div>
                 <div class="card" onclick="openDetail('training', 'cyber')">
                     <i class="fas fa-shield-virus card-icon"></i>
-                    <h3>Kibertəhlükəsizlik</h3>
-                    <p>Red Team (Hücum) və Blue Team (Müdafiə) əməliyyatları.</p>
+                    <h3>Red Team (Ethical Hacking)</h3>
+                    <p>Penetration testing, web & network hücumları, phishing ssenariləri, zəifliklərin aşkarlanması və exploit metodları ilə praktik hücum yanaşması.</p>
                     <div class="read-more">Sillabusa Bax <i class="fas fa-arrow-right"></i></div>
                 </div>
                 <div class="card" onclick="openDetail('training', 'network')">
                     <i class="fas fa-network-wired card-icon"></i>
-                    <h3>Şəbəkə İnzibatçılığı</h3>
-                    <p>Cisco, Routing, Switching və sistem idarəetməsi.</p>
+                    <h3>Helpdesk & IT Foundation</h3>
+                    <p>Kompüter yığımı, Windows/Linux, şəbəkə əsasları, istifadəçi problemlərinin həlli və real IT support ssenariləri ilə işə hazır təlim.</p>
                     <div class="read-more">Sillabusa Bax <i class="fas fa-arrow-right"></i></div>
                 </div>
             </div>
@@ -424,8 +423,8 @@
         <div class="contact-wrapper">
              <div>
                 <h3 style="margin-bottom: 2rem; color: var(--accent);">Kontakt</h3>
-                <p>Bakı şəhəri, Nizami küç. 203</p>
-                <p>+994 50 123 45 67</p>
+                <p>Bakı şəh. Elmlər akademiyası metro stansiyası, əsas çıxış üzbəüz</p>
+                <p></p>
              </div>
              <form onsubmit="event.preventDefault(); alert('Mesajınız göndərildi.');">
                 <div class="form-group"><input type="text" class="form-control" placeholder="Adınız"></div>
@@ -531,9 +530,9 @@
 
         // --- 2. DATA OBJECTS ---
         const trainingData = {
-            'devops': { title: "DevOps Engineering", img: "https://images.unsplash.com/photo-1667372393119-c85c020799a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80", desc: "<p>DevOps mühəndisliyi...</p>" },
-            'cyber': { title: "Kibertəhlükəsizlik", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80", desc: "<p>Hücum və Müdafiə...</p>" },
-            'network': { title: "Şəbəkə İnzibatçılığı", img: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80", desc: "<p>Cisco və Network...</p>" }
+            'devops': { title: "Blue Team", img: "https://images.unsplash.com/photo-1667372393119-c85c020799a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80", desc: "<p>Kibermüdafiəyə hazır ol</p>" },
+            'cyber': { title: "Red Team", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80", desc: "<p>Ethical hacker olmağa hazırsan?</p>" },
+            'network': { title: "Helpdesk & IT Foundation", img: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80", desc: "<p>İT dünyasına sən də başla...</p>" }
         };
         const corpData = {
             'consulting': { title: "Kiber Konsultasiya", img: "./photos/Kiberkonsultasiya.jpg", desc: "Korporativ təhlükəsizlik proqramları..." }
