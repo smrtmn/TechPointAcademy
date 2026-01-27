@@ -509,18 +509,19 @@
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <h3>Qeydiyyat</h3>
-            <form class="modal-form" id="internalRegForm" onsubmit="submitRegistration(event)">
+            <form class="modal-form" action="https://docs.google.com/forms/d/e/FORM_ID/formResponse" method="POST" target="hidden_iframe" onsubmit="submitRegistration(event)">
+
                 <div class="form-group">
                     <label>Ad və Soyad *</label>
-                    <input type="text" name="fullname" required placeholder="Tam adınızı daxil edin">
+                    <input type="text" name="entry.1111111111" required placeholder="Tam adınızı daxil edin">
                 </div>
                 <div class="form-group">
                     <label>Mobil Nömrə *</label>
-                    <input type="tel" name="phone" required placeholder="050 000 00 00">
+                    <input type="tel" name="entry.2222222222" required placeholder="050 000 00 00">
                 </div>
                 <div class="form-group">
                     <label>Təlim *</label>
-                    <select name="course" id="modalCourseSelect" required>
+                    <select name="entry.3333333333" id="modalCourseSelect" required>
                         <option value="">Seçin...</option>
                         <option value="Kibertəhlükəsizlik">Blue Team</option>
                         <option value="Şəbəkə İnzibatçılığı">Red Team</option>
@@ -529,6 +530,7 @@
                 </div>
                 <button type="submit" class="modal-submit">Təsdiqlə və Göndər</button>
             </form>
+            <iframe name="hidden_iframe" style="display:none;"></iframe>
         </div>
     </div>
 
@@ -658,7 +660,10 @@
                 
                 <div class="detail-section">
                     <div class="detail-title"><i class="fas fa-briefcase" style="color:var(--accent)"></i> İş Təcrübəsi</div>
-                    <p class="detail-text">5+ il dövlət və bank sektorunda SOC komanda rəhbəri. Kritik infrastrukturların müdafiəsi.</p>
+                    <p class="detail-text">- İnnovasiya və Rəqəmsal İnkişaf Agentliyi</p>
+                    <p class="detail-text">- Azərbaycan Respublikasının Mərkəzi Bankı</p>
+                    <p class="detail-text">- Bakelektro ASC</p>
+                    <p class="detail-text">- Citynet</p>
                 </div>
 
                 <div class="detail-section">
@@ -667,13 +672,14 @@
                         <span>SOC Management</span>
                         <span>Incident Response</span>
                         <span>Threat Intelligence</span>
-                        <span>Splunk</span>
+                        <span>QRadar</span>
                     </div>
                 </div>
 
                 <div class="detail-section">
                     <div class="detail-title"><i class="fas fa-certificate" style="color:var(--accent)"></i> Sertifikatlar</div>
-                    <p class="detail-text"></p>
+                    <p class="detail-text">- CRPO Certified Ransomware Protection Officer</p>
+                    <p class="detail-text">- Red Hat Certified System Administrator</p>
                 </div>
                 
                 <div style="margin-top:auto;">
@@ -696,7 +702,9 @@
                 
                 <div class="detail-section">
                     <div class="detail-title"><i class="fas fa-briefcase"></i> İş Təcrübəsi</div>
-                    <p class="detail-text">Böyük şirkətlərdə Kibertəhlükəsizlik analitiki. Log analizi və SIEM mühəndisliyi üzrə ekspert.</p>
+                    <p class="detail-text">- PAŞA SIĞORTA</p>
+                    <p class="detail-text">- İnnovasiya və Rəqəmsal İnkişaf Agentliyi</p>
+                    <p class="detail-text">- Bank Respublika</p>
                 </div>
 
                 <div class="detail-section">
@@ -710,7 +718,10 @@
 
                 <div class="detail-section">
                     <div class="detail-title"><i class="fas fa-certificate"></i> Sertifikatlar</div>
-                    <p class="detail-text"></p>
+                    <p class="detail-text">- eCTHPv2</p>
+                    <p class="detail-text">- CompTIA Security+</p>
+                    <p class="detail-text">- Certified in Cybersecurity (ISC2)</p>
+                    <p class="detail-text">- Threat Hunter (CyberDefenders)</p>
                 </div>
             </div>
         </div>
@@ -729,7 +740,7 @@
                 
                 <div class="detail-section">
                     <div class="detail-title"><i class="fas fa-briefcase"></i> İş Təcrübəsi</div>
-                    <p class="detail-text">Penetration Tester olaraq beynəlxalq layihələrdə iştirak. Zəifliklərin aşkarlanması üzrə mütəxəssis.</p>
+                    <p class="detail-text">- Azərbaycan Dövlət Su Ehtiyatları Agentliyi</p>
                 </div>
 
                 <div class="detail-section">
@@ -744,7 +755,11 @@
 
                 <div class="detail-section">
                     <div class="detail-title"><i class="fas fa-certificate"></i> Sertifikatlar</div>
-                    <p class="detail-text"></p>
+                    <p class="detail-text">- Certified Red Team Analyst [CRTA]</p>
+                    <p class="detail-text">- eCPPTv2</p>
+                    <p class="detail-text">- eJPTv2</p>
+                    <p class="detail-text">- eWPT</p>
+                    <p class="detail-text">- CEH Practical</p>
                 </div>
             </div>
         </div>
@@ -763,7 +778,9 @@
                 
                 <div class="detail-section">
                     <div class="detail-title"><i class="fas fa-briefcase"></i> İş Təcrübəsi</div>
-                    <p class="detail-text">Şəbəkə təhlükəsizliyi və Firewall idarəçiliyi. Korporativ şəbəkələrin müdafiəsi.</p>
+                    <p class="detail-text">- İnnovasiya və Rəqənsal İnkişaf Agentliyi</p>
+                    <p class="detail-text">- Azericard</p>
+                    <p class="detail-text">- Cydeo</p>
                 </div>
 
                 <div class="detail-section">
@@ -777,7 +794,9 @@
 
                 <div class="detail-section">
                     <div class="detail-title"><i class="fas fa-certificate"></i> Sertifikatlar</div>
-                    <p class="detail-text"></p>
+                    <p class="detail-text">Blue Team Level 1 (BTL1)</p>
+                    <p class="detail-text">CCNA</p>
+                    <p class="detail-text">CompTIA Security+ </p>
                 </div>
             </div>
         </div>
@@ -934,11 +953,27 @@
 
 
         // --- 2. DATA OBJECTS ---
-        const trainingData = {
-            'devops': { title: "Blue Team", img: "https://images.unsplash.com/photo-1667372393119-c85c020799a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80", desc: "<p>Kibermüdafiəyə hazır ol</p>" },
-            'cyber': { title: "Red Team", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80", desc: "<p>Ethical hacker olmağa hazırsan?</p>" },
-            'network': { title: "Helpdesk & IT Foundation", img: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80", desc: "<p>İT dünyasına sən də başla...</p>" }
+                const trainingData = {
+            'devops': { 
+                title: "Blue Team",
+                img: "https://images.unsplash.com/photo-1667372393119-c85c020799a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
+                desc: "<p>Kibermüdafiəyə hazır ol</p>",
+                pdf: "./syllabus/blue-team.pdf"
+            },
+            'cyber': { 
+                title: "Red Team",
+                img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
+                desc: "<p>Ethical hacker olmağa hazırsan?</p>",
+                pdf: "./syllabus/red-team.pdf"
+            },
+            'network': { 
+                title: "Helpdesk & IT Foundation",
+                img: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
+                desc: "<p>İT dünyasına sən də başla...</p>",
+                pdf: "./syllabus/helpdesk.pdf"
+            }
         };
+
         const corpData = {
             'consulting': { title: "Kiber Konsultasiya", img: "./photos/Kiberkonsultasiya.jpg", desc: "Korporativ təhlükəsizlik proqramları..." }
         };
@@ -1001,6 +1036,18 @@
                 btnHtml = `<button class="register-btn" onclick="openModal('${courseName}')">Qeydiyyatdan Keç</button>`;
             }
 
+            let syllabusBtn = '';
+            if (type === 'training' && data.pdf) {
+                syllabusBtn = `
+                    <a href="${data.pdf}" target="_blank"
+                    class="register-btn"
+                    style="background:#0ea5e9;margin-left:10px;">
+                    Sillabusa bax (PDF)
+                    </a>
+                `;
+            }
+
+
             detailView.innerHTML = `
                 <div class="container detail-content">
                     <button class="back-btn" onclick="closeDetail('${listId}', '${viewId}')">
@@ -1010,6 +1057,7 @@
                     <h2>${data.title}</h2>
                     <div class="text-body">${data.desc}</div>
                     ${btnHtml}
+                    ${syllabusBtn}
                 </div>
             `;
             detailView.scrollIntoView({ behavior: 'smooth' });
