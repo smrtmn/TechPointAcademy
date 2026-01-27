@@ -79,6 +79,132 @@
         .section-head h2 { font-size: 2.5rem; margin-bottom: 1rem; color: white; text-shadow: 0 0 20px rgba(255,255,255,0.2); }
         .section-head p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
 
+        /* --- TEAM MODAL STYLES --- */
+        .team-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(2, 6, 23, 0.9); /* Arxa fonu qaraldır */
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .team-modal-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .team-modal-card {
+            background: #1e293b;
+            width: 100%;
+            max-width: 800px;
+            border-radius: 24px;
+            border: 1px solid #38bdf8; /* Accent color */
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.15);
+            display: flex;
+            overflow: hidden;
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        .team-modal-overlay.open .team-modal-card {
+            transform: scale(1);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            z-index: 10;
+        }
+
+        .modal-close-btn:hover {
+            background: #ef4444; /* Qırmızı rəng */
+            transform: rotate(90deg);
+        }
+
+        .modal-left {
+            width: 40%;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+            border-right: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .modal-avatar {
+            width: 180px; height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #38bdf8;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .modal-right {
+            width: 60%;
+            padding: 3rem 2rem;
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+
+        .modal-name {
+            font-size: 1.8rem;
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-role {
+            color: #38bdf8;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .modal-bio {
+            color: #94a3b8;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .team-modal-card {
+                flex-direction: column;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+            .modal-left, .modal-right {
+                width: 100%;
+                padding: 2rem;
+            }
+            .modal-right {
+                border-top: 1px solid rgba(255,255,255,0.1);
+            }
+            .modal-avatar {
+                width: 140px; height: 140px;
+            }
+        }
         /* --- 5. HERO SECTION --- */
         #home { 
             display: none; height: 100vh;
@@ -124,27 +250,159 @@
         .read-more { margin-top: 1.5rem; color: var(--accent); font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; }
 
         /* --- 7. TEAM SECTION --- */
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; }
+        /* --- TEAM HOVER CARD STYLES --- */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
         .team-card {
-            background: var(--secondary); border-radius: 20px;
-            overflow: hidden; text-align: center; border: 1px solid var(--border);
-            transition: 0.3s;
+            position: relative;
+            width: 100%;
+            height: 450px; /* Kartın hündürlüyü sabit olmalıdır */
+            background: #1e293b;
+            border-radius: 20px;
+            overflow: hidden; /* Daşan hissələri gizlədir */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s ease;
         }
-        .team-card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        
-        .team-img-box {
-            height: 200px; background: linear-gradient(135deg, #1e293b, #334155);
-            display: flex; align-items: flex-end; justify-content: center;
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            border-color: #38bdf8;
+            box-shadow: 0 20px 40px rgba(56, 189, 248, 0.15);
         }
-        .team-img {
-            width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--secondary);
-            object-fit: cover; margin-bottom: -50px; background: #fff;
-        }
-        .team-info { padding: 60px 20px 30px; }
-        .team-role { color: var(--accent); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: block;}
-        .team-social { margin-top: 15px; display: flex; justify-content: center; gap: 15px; }
-        .team-social a { color: var(--text-muted); font-size: 1.2rem; transition: 0.3s; }
-        .team-social a:hover { color: var(--accent); }
+
+/* Şəkil hissəsi */
+.team-img-box {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+}
+
+.team-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Hover olanda şəkli yaxınlaşdırırıq */
+.team-card:hover .team-img {
+    transform: scale(1.1);
+}
+
+/* Aşağıdakı Qısa Məlumat (Ad və Vəzifə - Default görünür) */
+.team-overlay-default {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%;
+    padding: 20px;
+    background: linear-gradient(to top, #020617 0%, transparent 100%);
+    z-index: 1;
+    transition: opacity 0.3s ease;
+}
+
+.team-card:hover .team-overlay-default {
+    opacity: 0; /* Hover olanda bunu gizlədirik ki, detallı görünüş gəlsin */
+}
+
+.team-name-default {
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: 700;
+}
+
+.team-role-default {
+    color: #38bdf8;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* Detallı Məlumat Paneli (Hover olanda çıxır) */
+.team-details-panel {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.96); /* Arxanı bir az daha tündləşdirdik */
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    
+    display: flex;
+    flex-direction: column;
+    
+    /* DƏYİŞİKLİK BURADADIR: Center yox, flex-start edirik */
+    justify-content: flex-start; 
+    
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+    overflow-y: auto; /* Yazı çox olsa scroll olacaq */
+}
+
+.team-details-panel::-webkit-scrollbar {
+    width: 6px;
+}
+.team-details-panel::-webkit-scrollbar-thumb {
+    background-color: rgba(56, 189, 248, 0.3);
+    border-radius: 4px;
+}
+
+/* Hover olanda paneli yuxarı qaldırırıq */
+.team-card:hover .team-details-panel {
+    transform: translateY(0);
+}
+
+/* Panel daxilindəki yazılar */
+.detail-name {
+    font-size: 1.8rem;
+    color: #38bdf8;
+    margin-bottom: 5px;
+}
+
+.detail-role {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: block;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 10px;
+}
+
+.detail-section {
+    margin-bottom: 1rem;
+}
+
+.detail-title {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.detail-text {
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.detail-tags span {
+    display: inline-block;
+    background: rgba(56, 189, 248, 0.1);
+    color: #38bdf8;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
 
         /* --- 8. DETAILED VIEW --- */
         .detail-overlay {
@@ -317,7 +575,7 @@
              <div>
                 <h3 style="font-size: 2rem; margin-bottom: 1rem;">Missiyamız</h3>
                 <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-                    TechPoint Academy olaraq missiyamız, IT və kibertəhlükəsizlik sahəsində real bilik və praktik bacarıqlara malik mütəxəssislər yetişdirməkdir.
+                    TechPoint Academy IT və kibertəhlükəsizlik sahəsində praktik biliklərə əsaslanan təlimlər təqdim edən ixtisaslaşmış tədris mərkəzidir. Akademiyamızın əsas məqsədi, tələbələri və mütəxəssisləri real iş mühitinə uyğun bacarıqlarla təmin etmək, onları bu sahədə peşəkar karyeraya hazırlamaqdır.Təlim proqramlarımız beynəlxalq standartlara və sertifikat imtahanlarına uyğun şəkildə hazırlanmışdır. Dərslər yalnız nəzəri biliklərlə məhdudlaşmır, real ssenarilər, laborator mühitlər və praktik tapşırıqlar üzərindən keçirilir. Bu yanaşma tələbələrimizin öyrəndiklərini real iş mühitində rahat şəkildə tətbiq etməsinə imkan yaradır. TechPoint Academy-də tədris təcrübəli, sertifikatlı və sahə üzrə aktiv çalışan mütəxəssislər tərəfindən aparılır. Müəllim heyətimiz kibertəhlükəsizlik və IT sahəsində real iş təcrübəsinə malikdir və tələbələrə yalnız bilik deyil, eyni zamanda düzgün istiqamət və praktiki baxış bucağı qazandırır. Akademiyamız təlim prosesi ilə yanaşı, tələbələrinə mentor dəstəyi, karyera planlaması, CV və LinkedIn optimallaşdırılması kimi xidmətlər də təqdim edir. Məqsədimiz, tələbələrimizin yalnız təlimi bitirməsi deyil, iş həyatına hazır və özünə güvənən mütəxəssis kimi formalaşmasıdır. TechPoint Academy olaraq inanırıq ki, düzgün təlim, davamlı dəstək və praktik yanaşma ilə hər kəs IT və kibertəhlükəsizlik sahəsində uğurlu karyera qura bilər. Biz bu yolun hər mərhələsində tələbələrimizin yanında olmağı əsas dəyərimiz hesab edirik.
                 </p>
                 <ul style="list-style: none; color: var(--text-main);">
                     <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 10px;"></i> Mentor və karyera dəstəyi</li>
@@ -325,7 +583,7 @@
                     <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 10px;"></i> 100% Praktiki Tədris</li>
                 </ul>
             </div>
-            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" style="width: 100%; border-radius: 20px; opacity: 0.9;" alt="Team">
+            <img src="./photos/techpointlogo.png" style="width: 100%; border-radius: 20px; opacity: 0.9;" alt="Team">
         </div>
     </section>
 
@@ -377,30 +635,176 @@
         <div id="training-detail-view" class="detail-overlay"></div>
     </section>
 
-    <section id="team">
-        <div class="section-head">
-            <h2>Komandamız</h2>
-            <p>Sahəsinin ən yaxşı ekspertləri sizinlədir.</p>
-        </div>
-        <div class="team-grid">
-             <div class="team-card">
-                <div class="team-img-box"><img src="./photos/Cefer Memmedzade.jpg" alt="Instructor" class="team-img"></div>
-                <div class="team-info">
-                    <h3>Cəfər Məmmədzadə</h3>
-                    <span class="team-role">Direktor & Blue Team</span>
-                    <div class="team-social"><a href="#"><i class="fab fa-linkedin"></i></a></div>
+     <section id="team">
+    <div class="section-head">
+        <h2>Komandamız</h2>
+        <p>Təlimçilərimiz haqqında ətraflı məlumat üçün kursoru şəklin üzərinə gətirin.</p>
+    </div>
+    
+    <div class="team-grid">
+        <div class="team-card">
+            <div class="team-img-box">
+                <img src="./photos/Cefer Memmedzade.jpg" alt="Cəfər Məmmədzadə" class="team-img">
+            </div>
+            
+            <div class="team-overlay-default">
+                <h3 class="team-name-default">Cəfər Məmmədzadə</h3>
+                <span class="team-role-default">Direktor & Blue Team</span>
+            </div>
+
+            <div class="team-details-panel">
+                <h3 class="detail-name">Cəfər Məmmədzadə</h3>
+                <span class="detail-role">Direktor & Blue Team Mentor</span>
+                
+                <div class="detail-section">
+                    <div class="detail-title"><i class="fas fa-briefcase" style="color:var(--accent)"></i> İş Təcrübəsi</div>
+                    <p class="detail-text">5+ il dövlət və bank sektorunda SOC komanda rəhbəri. Kritik infrastrukturların müdafiəsi.</p>
+                </div>
+
+                <div class="detail-section">
+                    <div class="detail-title"><i class="fas fa-code" style="color:var(--accent)"></i> Bilik və Bacarıqlar</div>
+                    <div class="detail-tags">
+                        <span>SOC Management</span>
+                        <span>Incident Response</span>
+                        <span>Threat Intelligence</span>
+                        <span>Splunk</span>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <div class="detail-title"><i class="fas fa-certificate" style="color:var(--accent)"></i> Sertifikatlar</div>
+                    <p class="detail-text">CISSP, CISM, CompTIA Security+</p>
+                </div>
+                
+                <div style="margin-top:auto;">
+                    <a href="https://linkedin.com/in/jafar-mammadzada" target="_blank" style="color:#fff; font-size:1.5rem;"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
-             <div class="team-card">
-                <div class="team-img-box"><img src="./photos/TeymurNovruzov.jpg" alt="Instructor" class="team-img"></div>
-                <div class="team-info">
-                    <h3>Teymur Novruzov</h3>
-                    <span class="team-role">Blue Team</span>
-                    <div class="team-social"><a href="#"><i class="fab fa-linkedin"></i></a></div>
+        </div>
+
+        <div class="team-card">
+            <div class="team-img-box">
+                <img src="./photos/TeymurNovruzov.jpg" alt="Teymur Novruzov" class="team-img">
+            </div>
+            <div class="team-overlay-default">
+                <h3 class="team-name-default">Teymur Novruzov</h3>
+                <span class="team-role-default">Blue Team Mentor</span>
+            </div>
+            <div class="team-details-panel">
+                <h3 class="detail-name">Teymur Novruzov</h3>
+                <span class="detail-role">Blue Team Mentor</span>
+                
+                <div class="detail-section">
+                    <div class="detail-title"><i class="fas fa-briefcase"></i> İş Təcrübəsi</div>
+                    <p class="detail-text">Böyük şirkətlərdə Kibertəhlükəsizlik analitiki. Log analizi və SIEM mühəndisliyi üzrə ekspert.</p>
+                </div>
+
+                <div class="detail-section">
+                    <div class="detail-title"><i class="fas fa-code"></i> Bacarıqlar</div>
+                    <div class="detail-tags">
+                        <span>SIEM Engineering</span>
+                        <span>Digital Forensics</span>
+                        <span>Malware Analysis</span>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <div class="detail-title"><i class="fas fa-certificate"></i> Sertifikatlar</div>
+                    <p class="detail-text">BTL1, CCD, Splunk Certified Admin</p>
                 </div>
             </div>
         </div>
-    </section>
+
+        <div class="team-card">
+            <div class="team-img-box">
+                <img src="./photos/BehramAgaehmedli.jpg" alt="Bəhram Ağaəhmədli" class="team-img">
+            </div>
+            <div class="team-overlay-default">
+                <h3 class="team-name-default">Bəhram Ağaəhmədli</h3>
+                <span class="team-role-default">Red Team Mentor</span>
+            </div>
+            <div class="team-details-panel">
+                <h3 class="detail-name">Bəhram Ağaəhmədli</h3>
+                <span class="detail-role">Red Team Mentor</span>
+                
+                <div class="detail-section">
+                    <div class="detail-title"><i class="fas fa-briefcase"></i> İş Təcrübəsi</div>
+                    <p class="detail-text">Penetration Tester olaraq beynəlxalq layihələrdə iştirak. Zəifliklərin aşkarlanması üzrə mütəxəssis.</p>
+                </div>
+
+                <div class="detail-section">
+                    <div class="detail-title"><i class="fas fa-code"></i> Bacarıqlar</div>
+                    <div class="detail-tags">
+                        <span>Web Pentesting</span>
+                        <span>Network Hacking</span>
+                        <span>Python for Security</span>
+                        <span>Burp Suite</span>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <div class="detail-title"><i class="fas fa-certificate"></i> Sertifikatlar</div>
+                    <p class="detail-text">OSCP, CEH Master, eJPT</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <div class="team-img-box">
+                <img src="./photos/FeridAbbasov.png" alt="Fərid Abbasov" class="team-img">
+            </div>
+            <div class="team-overlay-default">
+                <h3 class="team-name-default">Fərid Abbasov</h3>
+                <span class="team-role-default">Blue Team Mentor</span>
+            </div>
+            <div class="team-details-panel">
+                <h3 class="detail-name">Fərid Abbasov</h3>
+                <span class="detail-role">Blue Team Mentor</span>
+                
+                <div class="detail-section">
+                    <div class="detail-title"><i class="fas fa-briefcase"></i> İş Təcrübəsi</div>
+                    <p class="detail-text">Şəbəkə təhlükəsizliyi və Firewall idarəçiliyi. Korporativ şəbəkələrin müdafiəsi.</p>
+                </div>
+
+                <div class="detail-section">
+                    <div class="detail-title"><i class="fas fa-code"></i> Bacarıqlar</div>
+                    <div class="detail-tags">
+                        <span>Network Security</span>
+                        <span>Firewall Config</span>
+                        <span>Linux Hardening</span>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <div class="detail-title"><i class="fas fa-certificate"></i> Sertifikatlar</div>
+                    <p class="detail-text">CCNP Security, Fortinet NSE 4</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+     </section>
+
+<div class="team-modal-overlay" id="teamModalOverlay" onclick="closeTeamModal(event)">
+    <div class="team-modal-card" onclick="event.stopPropagation()">
+        <button class="modal-close-btn" onclick="closeTeamModal()"><i class="fas fa-times"></i></button>
+        
+        <div class="modal-left">
+            <img src="" alt="" class="modal-avatar" id="modalImg">
+            <h3 class="modal-name" id="modalName">Ad Soyad</h3>
+            <span class="modal-role" id="modalRole">Vəzifə</span>
+            <div style="display: flex; gap: 15px; margin-top: 15px;">
+                <a href="#" id="modalLinkedin" style="color: #fff; font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        
+        <div class="modal-right">
+            <h4 style="color: #38bdf8; margin-bottom: 1rem; font-size: 1.2rem;">Haqqında</h4>
+            <div class="modal-bio" id="modalBio">
+                </div>
+        </div>
+    </div>
+</div>
 
     <section id="blog">
         <div id="blog-list">
