@@ -509,19 +509,19 @@
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <h3>Qeydiyyat</h3>
-            <form class="modal-form" action="https://docs.google.com/forms/d/e/FORM_ID/formResponse" method="POST" target="hidden_iframe" onsubmit="submitRegistration(event)">
+            <form class="modal-form" action="https://docs.google.com/forms/d/e/1FAIpQLSc4iS5Q3St1ZqJeOOkMVwPtEgNqLqGvbIqG-uYwClzpkUZXEQ/formResponse" method="POST" target="hidden_iframe" onsubmit="submitRegistration(event)">
 
                 <div class="form-group">
                     <label>Ad və Soyad *</label>
-                    <input type="text" name="entry.1111111111" required placeholder="Tam adınızı daxil edin">
+                    <input type="text" name="entry.398519981" required placeholder="Tam adınızı daxil edin">
                 </div>
                 <div class="form-group">
                     <label>Mobil Nömrə *</label>
-                    <input type="tel" name="entry.2222222222" required placeholder="050 000 00 00">
+                    <input type="tel" name="entry.730656816" required placeholder="050 000 00 00">
                 </div>
                 <div class="form-group">
                     <label>Təlim *</label>
-                    <select name="entry.3333333333" id="modalCourseSelect" required>
+                    <select name="entry.1016655390" id="modalCourseSelect" required>
                         <option value="">Seçin...</option>
                         <option value="Kibertəhlükəsizlik">Blue Team</option>
                         <option value="Şəbəkə İnzibatçılığı">Red Team</option>
@@ -542,13 +542,13 @@
             </div>
 
             <ul class="nav-menu" id="navMenu">
-                <li><a href="#" class="nav-link active" onclick="navigate('home')">Ana Səhifə</a></li>
-                <li><a href="#" class="nav-link" onclick="navigate('about')">Haqqımızda</a></li>
-                <li><a href="#" class="nav-link" onclick="navigate('corporate')">Korporativ</a></li>
-                <li><a href="#" class="nav-link" onclick="navigate('trainings')">Təlimlər</a></li>
-                <li><a href="#" class="nav-link" onclick="navigate('team')">Komanda</a></li>
-                <li><a href="#" class="nav-link" onclick="navigate('blog')">Blog</a></li>
-                <li><a href="#" class="nav-link" onclick="navigate('contact')">Əlaqə</a></li>
+                <li><a href="#" class="nav-link active" onclick="navigate('home', this)">Ana Səhifə</a></li>
+                <li><a href="#" class="nav-link" onclick="navigate('about', this)">Haqqımızda</a></li>
+                <li><a href="#" class="nav-link" onclick="navigate('corporate', this)">Korporativ</a></li>
+                <li><a href="#" class="nav-link" onclick="navigate('trainings', this)">Təlimlər</a></li>
+                <li><a href="#" class="nav-link" onclick="navigate('team', this)">Komanda</a></li>
+                <li><a href="#" class="nav-link" onclick="navigate('blog', this)">Blog</a></li>
+                <li><a href="#" class="nav-link" onclick="navigate('contact', this)">Əlaqə</a></li>
             </ul>
 
             <div class="hamburger" onclick="toggleMenu()">
@@ -983,21 +983,43 @@
         };
 
         // --- 3. NAVIGATION ---
-        function navigate(pageId) {
-            document.getElementById('navMenu').classList.remove('active');
-            document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-            document.querySelectorAll('.detail-overlay').forEach(el => el.style.display = 'none');
-            
-            if(document.getElementById('corp-list')) document.getElementById('corp-list').style.display = 'block';
-            if(document.getElementById('training-list')) document.getElementById('training-list').style.display = 'block';
-            if(document.getElementById('blog-list')) document.getElementById('blog-list').style.display = 'block';
+        function navigate(pageId, el) {
 
+            // mobil menu bağla
+            document.getElementById('navMenu').classList.remove('active');
+
+            // section-ları söndür
+            document.querySelectorAll('section')
+                .forEach(sec => sec.classList.remove('active'));
+
+            // overlay-ləri bağla
+            document.querySelectorAll('.detail-overlay')
+                .forEach(o => o.style.display = 'none');
+
+            // list-ləri qaytar
+            if (document.getElementById('corp-list'))
+                document.getElementById('corp-list').style.display = 'block';
+
+            if (document.getElementById('training-list'))
+                document.getElementById('training-list').style.display = 'block';
+
+            if (document.getElementById('blog-list'))
+                document.getElementById('blog-list').style.display = 'block';
+
+            // section aktiv et
             const target = document.getElementById(pageId);
             if (target) {
                 target.classList.add('active');
-                window.scrollTo(0,0);
+                window.scrollTo(0, 0);
             }
+
+            // 🔥 ƏSAS PROBLEM BURADAYDI — İNDİ FIX OLDU
+            document.querySelectorAll('#navMenu .nav-link')
+                .forEach(item => item.classList.remove('active'));
+
+            if (el) el.classList.add('active');
         }
+
         function toggleMenu() { document.getElementById('navMenu').classList.toggle('active'); }
 
         // --- 4. MODAL & FORM LOGIC (VACIB HISSƏ) ---
