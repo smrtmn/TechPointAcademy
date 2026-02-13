@@ -404,6 +404,110 @@
     margin-bottom: 5px;
 }
 
+
+/* --- YENİ ƏLAQƏ BÖLMƏSİ CSS --- */
+
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* Sol tərəf balaca, xəritə böyük */
+    gap: 2rem;
+    background: #1e293b;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+/* Sol Tərəf (Məlumatlar) */
+.contact-info-box {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 2rem;
+}
+
+.icon-box {
+    width: 50px; height: 50px;
+    background: rgba(56, 189, 248, 0.1);
+    color: #38bdf8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.text-box h4 {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.text-box p {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* Sosial Media Düymələri */
+.social-links-contact {
+    display: flex;
+    gap: 15px;
+    margin-top: 1rem;
+}
+
+.sc-icon {
+    width: 45px; height: 45px;
+    background: #0f172a;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.sc-icon:hover {
+    background: #38bdf8;
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(56, 189, 248, 0.3);
+}
+
+/* Sağ Tərəf (Xəritə) */
+.contact-map-box {
+    width: 100%;
+    min-height: 400px; /* Xəritənin hündürlüyü */
+}
+
+/* Mobil Uyğunlaşdırma */
+@media (max-width: 968px) {
+    .contact-wrapper {
+        grid-template-columns: 1fr; /* Mobildə alt-alta olsun */
+    }
+    .contact-info-box {
+        padding: 2rem;
+    }
+    .contact-map-box {
+        height: 300px;
+    }
+}
+
+
+
         /* --- 8. DETAILED VIEW --- */
         .detail-overlay {
             display: none; background: rgba(15, 23, 42, 0.95);
@@ -467,7 +571,7 @@
         .modal-submit:hover { background: white; }
 
 
-        /* --- 10. CONTACT FORM PAGE --- */
+        /* --- 10. CONTACT FORM PAGE ---
         .contact-wrapper {
             display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem;
             background: var(--secondary); padding: 3rem; border-radius: 24px; border: 1px solid var(--border);
@@ -479,7 +583,7 @@
             border: 1px solid var(--border); border-radius: 8px; color: var(--text-main);
             font-family: inherit;
         }
-        .form-control:focus { outline: none; border-color: var(--accent); }
+        .form-control:focus { outline: none; border-color: var(--accent); } */
 
         /* --- 11. RESPONSIVE --- */
         @media (max-width: 968px) {
@@ -842,22 +946,61 @@
     <section id="contact">
         <div class="section-head">
             <h2>Bizimlə Əlaqə</h2>
-            <p>Sualınız var? Bizə yazın.</p>
+            <p>Ofisimizə yaxınlaşa və ya sosial şəbəkələrdən yaza bilərsiniz.</p>
         </div>
+        
         <div class="contact-wrapper">
-             <div>
-                <h3 style="margin-bottom: 2rem; color: var(--accent);">Kontakt</h3>
-                <p>Bakı şəh. Elmlər akademiyası metro stansiyası, əsas çıxış üzbəüz</p>
-                <p></p>
+            <div class="contact-info-box">
+                <h3 style="margin-bottom: 2rem; color: #38bdf8; font-size: 1.8rem;">Kontakt</h3>
+                
+                <div class="info-item">
+                    <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="text-box">
+                        <h4>Ünvan:</h4>
+                        <p>Bakı şəh, Əhməd Cəmil 102<br><span style="font-size:0.9rem; color:#94a3b8;">(Elmlər Akademiyası m/s yaxınlığı)</span></p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="icon-box"><i class="fas fa-phone-alt"></i></div>
+                    <div class="text-box">
+                        <h4>Telefon:</h4>
+                        <p><a href="tel:+994552231755" style="color:#fff; text-decoration:none;">+994 55 223 17 55</a></p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="icon-box"><i class="fas fa-envelope"></i></div>
+                    <div class="text-box">
+                        <h4>Email:</h4>
+                        <p><a href="mailto:academytechpoint@gmail.com" style="color:#fff; text-decoration:none;">academytechpoint@gmail.com</a></p>
+                    </div>
+                </div>
+
+                <div class="social-links-contact">
+                    <a href="https://www.instagram.com/techpoint.academy/" target="_blank" class="sc-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/techpointacademy/" target="_blank" class="sc-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://wa.me/994552231755?text=Salam,%20kurslar%20haqqında%20məlumat%20almaq%20istəyirəm" target="_blank" class="sc-icon"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="contact-map-box">
+            <iframe 
+                width="100%" 
+                height="100%" 
+                id="gmap_canvas" 
+                src="https://www.google.com/maps?q=Əhməd+Cəmil+102+Bakı&output=embed" 
+                frameborder="0" 
+                scrolling="no" 
+                marginheight="0" 
+                marginwidth="0"
+                style="border:0; border-radius: 0 24px 24px 0;"> </iframe>
              </div>
-             <form onsubmit="event.preventDefault(); alert('Mesajınız göndərildi.');">
-                <div class="form-group"><input type="text" class="form-control" placeholder="Adınız"></div>
-                <div class="form-group"><input type="email" class="form-control" placeholder="Email"></div>
-                <div class="form-group"><textarea class="form-control" placeholder="Mesaj"></textarea></div>
-                <button class="btn-main" style="width: 100%; border-radius: 8px;">Göndər</button>
-            </form>
         </div>
-    </section>
+</section>
+
+
+
 
     <footer>
         <div style="max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
@@ -956,13 +1099,13 @@
                 const trainingData = {
             'devops': { 
                 title: "Blue Team",
-                img: "https://images.unsplash.com/photo-1667372393119-c85c020799a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
+                img: "./photos/blueteam.jpg",
                 desc: "<p>Kibermüdafiəyə hazır ol</p>",
                 pdf: "./syllabus/blue-team.pdf"
             },
             'cyber': { 
                 title: "Red Team",
-                img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
+                img: "./photos/redteam.jpg",
                 desc: "<p>Ethical hacker olmağa hazırsan?</p>",
                 pdf: "./syllabus/red-team.pdf"
             },
@@ -1031,10 +1174,10 @@
 
             // Əgər Blog deyilsə, "Qeydiyyat" düyməsi qoyuruq
             let btnHtml = '';
-            if (type !== 'blog') {
-                // Düyməyə kursun adını ötürürük ki, modal açılanda avtomatik seçilsin
-                btnHtml = `<button class="register-btn" onclick="openModal('${courseName}')">Qeydiyyatdan Keç</button>`;
-            }
+            // if (type !== 'blog') {
+            //     // Düyməyə kursun adını ötürürük ki, modal açılanda avtomatik seçilsin
+            //     btnHtml = `<button class="register-btn" onclick="openModal('${courseName}')">Qeydiyyatdan Keç</button>`;
+            // }
 
             let syllabusBtn = '';
             if (type === 'training' && data.pdf) {
