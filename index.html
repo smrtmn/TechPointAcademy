@@ -511,7 +511,7 @@
         /* --- 8. DETAILED VIEW --- */
         .detail-overlay {
             display: none; background: rgba(15, 23, 42, 0.95);
-            padding: 120px 20px 60px; min-height: 100vh;
+            padding: 100px 50px 60px; min-height: 100vh;
         }
         .back-btn {
             background: transparent; border: 1px solid var(--border); color: var(--text-main);
@@ -663,9 +663,9 @@
 
     <section id="home" class="active">
         <div class="hero-content">
-            <h1>Hörmətli tələbələr! <br><span>Veb-saytımız</span> düzəliş prosesindədir</h1>
+            <h1>Texnologiyanın <br><span>güvənilən</span><h1>nöqtəsi</h1>  
             <p class="hero-desc">
-               Yaxın zamanda veb-saytımızdan yararlana biləcəksiniz.
+               Doğru yerdəsən.
             </p>
             
             <button onclick="navigate('trainings')" class="btn-main">Karyerana Başla</button>
@@ -677,7 +677,7 @@
             <h2>Haqqımızda</h2>
             <p>Biz sadəcə tədris mərkəzi deyil, texnologiya və innovasiya mərkəziyik.</p>
         </div>
-        <div class="contact-wrapper" style="align-items: center;">
+        <div class="about-wrapper" style="align-items: center;">
              <div>
                 <h3 style="font-size: 2rem; margin-bottom: 1rem;">Missiyamız</h3>
                 <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
@@ -1118,12 +1118,102 @@
         };
 
         const corpData = {
-            'consulting': { title: "Kiber Konsultasiya", img: "./photos/Kiberkonsultasiya.jpg", desc: "Korporativ təhlükəsizlik proqramları..." }
+            consulting: {
+                title: "Kiber Konsultasiya",
+                img: "./photos/Kiberkonsultasiya.jpg",
+                desc: `
+                <p>
+                    TechPoint Academy olaraq şirkətlər üçün mövcud kibertəhlükəsizlik
+                    risklərini müəyyənləşdirən və qarşısını almağa yönəlmiş
+                    <strong>kiber konsultasiya</strong> xidməti təqdim edirik.
+                </p>
+
+                <ul>
+                    <li>IT infrastrukturunun təhlükəsizlik analizi</li>
+                    <li>İşçilər üçün phishing və sosial mühəndislik risklərinin qiymətləndirilməsi</li>
+                    <li>Mövcud təhlükəsizlik boşluqlarının aşkarlanması</li>
+                    <li>Rəhbərlik üçün sadə və anlaşılan tövsiyələr</li>
+                </ul>
+
+                <p>
+                    Xidmətimiz kibertəhlükəsizlik komandası olmayan şirkətlər üçün
+                    ideal başlanğıc nöqtəsidir.
+                </p>
+                <p>
+                    Detallı məlumat üçün: +994552231755 <br>
+                    İnstagram: <a href="https://www.instagram.com/techpoint.academy/">TechPoint Academy</a>
+                </p>
+                `
+            }
         };
+
         const blogData = {
-            'ai-sec': { title: "AI və Təhlükəsizlik", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80", desc: "<p>AI trendləri...</p>" },
-            'cloud': { title: "Cloud Texnologiyası", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80", desc: "Cloud keçidləri..." }
+            'ai-sec': {
+                title: "AI və Təhlükəsizlik",
+                img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
+                desc: `
+                <h2>Rahatlıq gətirən texnologiya, yoxsa gizli risk?</h2>
+
+                <p>
+                    Son dövrlərdə süni intellekt həyatımıza o qədər sürətlə daxil olub ki,
+                    artıq onsuz bir çox prosesi təsəvvür etmək çətindir.
+                    Mesaj yazmaqdan tutmuş, şəkil tanımağa, məlumat analizindən
+                    təhlükəsizlik sistemlərinə qədər hər yerdə AI var. Amma məsələ burasındadır ki, bu texnologiya bizi qoruduğu qədər
+                    eyni zamanda yeni risklər də yarada bilir.
+                </p>
+
+                <h3>Təhlükəsizlikdə AI nə iş görür?</h3>
+
+                <p>
+                    AI əsasən təhlükələri insandan daha tez fərq etmək üçün istifadə olunur.
+                    Ənənəvi təhlükəsizlik sistemləri müəyyən qaydalara əsaslanırdı,
+                    süni intellekt isə davranışları analiz edir.
+                    Yəni "nə olmalı idi" yox, "nə adi deyil" onu tapır.
+                </p>
+
+                <ul>
+                    <li>Şirkət şəbəkəsinə qeyri-adi saatda giriş cəhdləri</li>
+                    <li>E-poçt vasitəsilə göndərilən şübhəli linklər</li>
+                    <li>Normal proqram kimi görünən, amma arxa planda zərər verən fayllar</li>
+                </ul>
+
+                <p>
+                    Bu kimi təhlükələri AI çox vaxt saniyələr ərzində aşkar edə bilir
+                    və potensial zərərin qarşısını vaxtında almağa kömək edir.
+                </p>
+
+                <h3>Bəs problem haradadır?</h3>
+
+                <p>
+                    Məsələ ondadır ki, AI təkcə müdafiədə istifadə olunmur. Hücum edən tərəf də eyni texnologiyadan yararlanır.
+                    Artıq phishing mesajları daha inandırıcıdır, saxta səs və videolar gerçəkdən ayırd edilmir, hətta bəzi hücumlar tam avtomatik həyata keçirilir. Yəni texnologiya gücləndikcə risk də böyüyür.
+                </p>
+                <h3>İnsan faktoru niyə hələ də önəmlidir?</h3>
+                <p>
+                    Bəzən elə düşünülür ki, "AI var, artıq problem yoxdur". Amma reallıqda ən böyük boşluq hələ də insandır.
+                    Zəif parollar, diqqətsiz kliklənən linklər, tanınmayan fayllar — bütün bunlar ən güclü sistemi belə zəif sala bilər. AI kömək edir, amma qərarı yenə insan verir.
+                </p>
+                <h3>Gələcəkdə bizi nə gözləyir?</h3>
+                <p>
+                    Yaxın illərdə AI:
+                </p>
+                <ul>
+                    <li>Təhlükələri daha erkən aşkar edəcək</li>
+                    <li>Bir çox hücumu avtomatik bloklayacaq</li>
+                    <li>Təhlükəsizlik komandalarının işini xeyli asanlaşdıracaq</li>
+                </ul>
+                <p>
+                    Amma eyni zamanda hücumlar da daha ağıllı olacaq. Bu da o deməkdir ki, kibertəhlükəsizlik bilikləri hər kəs üçün daha vacib hala gələcək.
+                </p>
+                <h3>Nəticədə:</h3>
+                <p>
+                    AI nə düşməndir, nə də xilaskar. O, sadəcə bir alətdir. Onu necə istifadə etdiyimiz isə hər şeyi müəyyən edir.
+                    Texnologiya dəyişir, amma bir şey dəyişmir: məlumatlı olmaq hələ də ən güclü müdafiədir.
+                </p>
+                `
+            }
         };
+            
 
         // --- 3. NAVIGATION ---
         function navigate(pageId, el) {
